@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- claim the brainboard USB device (one-time user "allow" at first launch) -->
+    <uses-permission android:name="android.permission.USB_HOST" />
+    <uses-permission android:name="android.permission.USB_PERMISSION" />
+
+    <!-- FTMS advertising + GATT server (Android 9: classic BT permissions) -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
+    <!-- the tablet drives the brainboard as a USB host (213c:0002) -->
+    <uses-feature android:name="android.hardware.usb.host" android:required="false" />
+
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <application
+        android:label="Open FTMS Bridge"
+        android:allowBackup="false">
+
+        <activity
+            android:name=".MainActivity"
+            android:label="Open FTMS Bridge"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name=".BridgeService"
+            android:exported="false" />
+
+        <!--
+        <receiver
+            android:name=".BootReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        -->
+    </application>
+</manifest>
